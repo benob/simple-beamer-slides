@@ -25,3 +25,7 @@ A vim syntax coloring scheme is provided in slides.vim, simply put that file
 in ~/.vim/syntax and add this line to your .vimrc file:
 
 au BufRead,BufNewFile *.slides setfiletype slides
+
+Similar projects:
+* Easy beamer http://ezbm.sourceforge.net
+* Wiki to beamer http://wiki2beamer.sourceforge.net/

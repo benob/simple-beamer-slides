@@ -87,7 +87,7 @@ while(<>) {
             } else {
                 warn("WARNING: unknown pragma [$_]");
             }
-        } elsif(/^===/) {
+        } elsif(/^(===|---)/) {
             $before_document = 0;
             if(exists $info{Title}) {
                 push @document, '\maketitle';
@@ -103,6 +103,14 @@ while(<>) {
     }
     if($before_document == 0) {
         if(/\\begin{verbatim}/) {
+            for($i = $#document; $i >= 0; $i --) {
+                if($document[$i] =~ /\\begin{frame}(\[.*\])?/) {
+                     if(not defined $1) {
+                        $document[$i].="[containsverbatim]";
+                    }
+                    break;
+                }
+            }
             $in_verbatim = 1;
         }
         if($in_verbatim) {
@@ -166,7 +174,7 @@ while(<>) {
             push @document, '\section{'.$1.'}';
         } elsif(/^--+s*(.*?)\s*-*$/) {
             &close_lists(); $in_frame and push @document, '\end{frame}';
-            push @document, '\begin{frame}[containsverbatim]';
+            push @document, '\begin{frame}';
             push @document, '\frametitle{'.$1.'}';
             $in_frame = 1;
         } elsif(/^( *)([*#-]|\d+\.) (.*)/) {
@@ -179,20 +187,19 @@ while(<>) {
                 push @tab, length($1);
                 push @list_type, $target;
                 push @document, '\begin{'.$target.'}';
-            } elsif($list_type[$#list_type] ne $target) {
-                pop @tab;
-                push @document, '\end{'.(pop @list_type).'}';
-                push @tab, length($1);
-                push @list_type, $target;
-                push @document, '\begin{'.$target.'}';
             } elsif(length($1) > $tab[$#tab]) {
                 push @tab, length($1);
                 push @list_type, $target;
                 push @document, '\begin{'.$target.'}';
             } elsif(length($1) < $tab[$#tab]) {
                 pop @tab;
-                pop @list_type;
-                push @document, '\end{'.$target.'}';
+                push @document, '\end{'.(pop @list_type).'}';
+            } elsif($list_type[$#list_type] ne $target) {
+                pop @tab;
+                push @document, '\end{'.(pop @list_type).'}';
+                push @tab, length($1);
+                push @list_type, $target;
+                push @document, '\begin{'.$target.'}';
             }
             push @document, '\item '.$3;
         } elsif(/^%%% (.*)/) {
