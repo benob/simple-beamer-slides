@@ -1,0 +1,27 @@
+Simple Beamer Slides
+====================
+Benoit Favre <benoit.favre@lif.univ-mrs.fr>
+
+This converter allows to write slides with a wiki-like syntax and convert them
+to beamer/latex for a nice pdf rendering.  While many projects provide
+converters from markup languages to slides, this one is specifically tailored
+towards making life with beamer easier.  See format.slides (and corresponding
+format.pdf) for an overview of capabilities and syntax sugar provided.
+
+Current features:
+* inclusion of latex commands
+* slide and section markers
+* title page and outline
+* bullet lists an enumerations
+* math sugar
+* graphics
+* urls
+
+Planned features:
+* code highlighting
+* more sugar
+
+A vim syntax coloring scheme is provided in slides.vim, simply put that file
+in ~/.vim/syntax and add this line to your .vimrc file:
+
+au BufRead,BufNewFile *.slides setfiletype slides

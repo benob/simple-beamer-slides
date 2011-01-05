@@ -1,0 +1,92 @@
+Lang: english
+Title: [Short title] Long title
+Author: [Short author] Long author
+Institute: [Short institute] Long institute
+Date: \today
+% don't give an outline title to remove the outline slides
+Outline: Title of outline slides
+Theme: Boadilla
+
+=== First section ===
+
+--- Bullets ---
+
+Bullets start with * and are based on alignment
+* Bullet 1
+* Bullet 2
+  * Second level of bullets
+
+Enumerations with with \# and dotted numbers
+# Enum 1
+# Enum 2
+  1. Second level of enum (numeric)
+  2. Even more enum
+(some text in the item)
+
+Some text after the bullets
+
+--- Simple text stuff ---
+
+Make italics with _underscores like this_.
+
+Make bold with *stars like this*.
+
+Urls like http://www.google.com get recognized.
+
+The => symbol is changed to an arrow
+
+The > sign is wrapped in maths
+
+--- Maths ---
+
+Simple inline math: $a+b+c$
+
+Multiline math is an align environment (starts and ends with a single dollar on the line)
+
+$
+a & b \\
+c & d
+$
+
+Fancy stuff in math:
+* No need for curly brackets in simple exponents/indices $a_10ab, a^11, b^(i+1)$
+* * is turned to times in $a * b$.
+* ... is turned to dots $a...b$.
+* @ makes the next symbol bold, ($@y, @\lambda, @x^i$ is a vector).
+
+--- Verbatim ---
+
+You can include a verbatim section
+
+\begin{verbatim}
+This is verbatim content {} * %$#
+\end{verbatim}
+
+% this is a comment
+Comments start with \%.
+
+--- Images ---
+
+Images are centered, the number before \# tells the percentage of the width to use:
+
+[10#structure.pdf]
+
+[30#structure.pdf]
+
+=== Second section ===
+
+--- TODO ---
+
+# Subsections
+# Columns
+# Improve graphics embedding
+# Shortcut for divisions in math (use the / symbol)
+# Vim syntax file:
+  * Support for special characters, highlight math tricks
+  * Highlight environments like verbatim
+# Auto protect latex special chars like \#, \&...
+# Make itemize/enumerate work together
+
+=== Third section ===
+
+=== Fourth section ===
