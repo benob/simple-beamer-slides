@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-@preamble = ('\documentclass{beamer}', '\usepackage[utf8]{inputenc}', '\usepackage{amsmath}');
+@preamble = ('\documentclass[10pt]{beamer}', '\usepackage[utf8]{inputenc}', '\usepackage{amsmath}');
 $theme = 'Warsaw';
 %info = ();
 @document = ('\begin{document}');
@@ -47,6 +47,7 @@ sub save_verbatim() {
 sub process_text() {
     my @output;
     for $_(@_) {
+        s/<=>/ \$\\leftrightarrow\$ /g;
         s/=>/ \$\\to\$ /g;
         s/</\$<\$/g; s/>/\$>\$/g;
         s/ "(\S|$)/ ``$1/g;
@@ -108,7 +109,7 @@ while(<>) {
                      if(not defined $1) {
                         $document[$i].="[containsverbatim]";
                     }
-                    break;
+                    last;
                 }
             }
             $in_verbatim = 1;
@@ -122,20 +123,20 @@ while(<>) {
         }
         if(/^\s*\$\s*$/) {
             if($in_math) {
-                push @document, "\\end{align}";
+                push @document, "\\end{align*}";
                 $in_math = 0;
             } else {
-                push @document, "\\begin{align}";
+                push @document, "\\begin{align*}";
                 $in_math = 1;
             }
             next;
         }
-        if(/(\\\[|\\begin{align})/) {
+        if(/^(\\\[|\\begin{align\*?})/) {
             $in_math = 1;
         }
         if($in_math) {
             push @document, '$math'.&save_math($_).'$';
-            if(/(\\\]|\\end{align})/) {
+            if(/^(\\\]|\\end{align\*?})/) {
                 $in_math = 0;
             }
             next;
@@ -178,22 +179,24 @@ while(<>) {
             push @document, '\frametitle{'.$1.'}';
             $in_frame = 1;
         } elsif(/^( *)([*#-]|\d+\.) (.*)/) {
-            my $spaces = $1;
+            my $spaces = length($1);
             my $target = 'enumerate';
             if($2 eq '*' or $2 eq '-') {
                 $target = 'itemize';
             }
             if(scalar(@list_type) == 0) {
-                push @tab, length($1);
+                push @tab, $spaces;
                 push @list_type, $target;
                 push @document, '\begin{'.$target.'}';
-            } elsif(length($1) > $tab[$#tab]) {
-                push @tab, length($1);
+            } elsif($spaces > $tab[$#tab]) {
+                push @tab, $spaces;
                 push @list_type, $target;
                 push @document, '\begin{'.$target.'}';
-            } elsif(length($1) < $tab[$#tab]) {
-                pop @tab;
-                push @document, '\end{'.(pop @list_type).'}';
+            } elsif($spaces < $tab[$#tab]) {
+                while($spaces < $tab[$#tab]) {
+                    pop @tab;
+                    push @document, '\end{'.(pop @list_type).'}';
+                }
             } elsif($list_type[$#list_type] ne $target) {
                 pop @tab;
                 push @document, '\end{'.(pop @list_type).'}';
