@@ -3,6 +3,9 @@
 " Maintainer: Benoit Favre
 " Latest Revision: 29 Dec 2010
 " Adapted from http://vim.wikia.com/wiki/Creating_your_own_syntax_files
+" to install it, just copy it in ~/.vim/syntax/ and add
+" au BufRead,BufNewFile *.slides setfiletype slides
+" to your ~/.vimrc file
 
 if exists("b:current_syntax")
   finish

@@ -26,6 +26,13 @@ in ~/.vim/syntax and add this line to your .vimrc file:
 
 au BufRead,BufNewFile *.slides setfiletype slides
 
+TUTORIAL:
+
+create a .slides file which respects the format (see format.slides). Then convert it to latex using 
+perl convert_slides.pl < file.slides > file.tex
+and compile the latex file:
+pdflatex file.tex
+
 Similar projects:
 * Easy beamer http://ezbm.sourceforge.net
 * Wiki to beamer http://wiki2beamer.sourceforge.net/
