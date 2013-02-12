@@ -65,6 +65,8 @@ This is verbatim content {} * %$#
 % this is a comment
 Comments start with \%.
 
+There can be `inline verbatim` denoted with backquotes.
+
 --- Images ---
 
 Images are centered, the number before \# tells the percentage of the width to use:
@@ -72,6 +74,29 @@ Images are centered, the number before \# tells the percentage of the width to u
 [10#structure.pdf]
 
 [30#structure.pdf]
+
+--- Code ---
+
+Code must be enclosed between `%%% language` and `%%%`. It gets highlighted with pygments.
+
+%%% python
+def this_is_a_python_function():
+    x = 2
+    y = 3
+    return x / y
+%%%
+
+If the language is `terminal`, then the enclosing looks like a terminal.
+
+%%% terminal
+x=2
+y=3
+echo `expr $x / $y`
+%%%
+
+--- Vim syntax file ---
+
+A vim syntax file is provided. Put it in `~/.vim/syntax` and add `au BufRead,BufNewFile *.slides setfiletype slides` to your `.vimrc` file.
 
 === Second section ===
 
@@ -83,7 +108,6 @@ Images are centered, the number before \# tells the percentage of the width to u
 # Shortcut for divisions in math (use the / symbol)
 # Vim syntax file:
   * Support for special characters, highlight math tricks
-  * Highlight environments like verbatim
 # Auto protect latex special chars like \#, \&...
 # Make itemize/enumerate work together
 

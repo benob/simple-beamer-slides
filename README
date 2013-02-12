@@ -17,21 +17,21 @@ Current features:
 * graphics
 * urls
 
-Planned features:
-* code highlighting
-* more sugar
-
 A vim syntax coloring scheme is provided in slides.vim, simply put that file
 in ~/.vim/syntax and add this line to your .vimrc file:
 
 au BufRead,BufNewFile *.slides setfiletype slides
+
+REQUIREMENTS:
+
+latex, pygments
 
 TUTORIAL:
 
 create a .slides file which respects the format (see format.slides). Then convert it to latex using 
 perl convert_slides.pl < file.slides > file.tex
 and compile the latex file:
-pdflatex file.tex
+pdflatex -shell-escape file.tex
 
 Similar projects:
 * Easy beamer http://ezbm.sourceforge.net
