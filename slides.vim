@@ -52,6 +52,7 @@ call TextEnableCodeSnip('javascript', '^%%% \+\(js\|javascript\) *$', '^%%%.*$',
 call TextEnableCodeSnip('python', '^%%% \+\(py\|python\) *$', '^%%%.*$', 'Comment')
 call TextEnableCodeSnip('cpp', '^%%% \+\(c\|cpp\|c++\) *$', '^%%%.*$', 'Comment')
 call TextEnableCodeSnip('sh', '^%%% \+\(sh\|shell\|bash\|terminal\) *$', '^%%%.*$', 'Comment')
+call TextEnableCodeSnip('html', '^%%% \+\(html\|htm\|xhtml\) *$', '^%%%.*$', 'Comment')
 
 let b:current_syntax = "slides"
 
@@ -69,3 +70,6 @@ hi def link slideUrl      Underlined
 
 " restore spell checking in case it was broken by others
 syn spell toplevel default
+
+" highlight whole file
+syn sync fromstart
