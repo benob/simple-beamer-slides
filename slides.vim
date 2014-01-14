@@ -35,10 +35,11 @@ endfunction
 
 syn match slideSection '^=== .* ==='
 syn match slideFrame '^--- .* ---'
+syn match slideSpecial "\\[$&%#{}_]"
 syn match slideComment '%.*$'
 syn match slideBullet '^\s*[\*#-] '
 syn match slideBullet '^\s*\d\d*\. '
-syn match slideLatex '\\[a-zA-Z0-9]*' contains=@NoSpell
+syn match slideLatex '\\[a-zA-Z0-9]\+' contains=@NoSpell
 syn match slideBracket '[{}]'
 syn match slideUrl 'http://[a-zA-Z0-9/._-]*' contains=@NoSpell
 syn region slideCode start="`" end="`" contains=@NoSpell
@@ -63,6 +64,7 @@ hi def link slideMath     Special
 hi def link slideVerb     Comment
 hi def link slideCode     Comment
 hi def link slideBullet   SpecialChar
+hi def link slideSpecial  Todo
 hi def link slideLatex    Keyword
 hi def link slideBracket  Keyword
 hi def link slideString   String

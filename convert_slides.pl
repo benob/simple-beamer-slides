@@ -216,10 +216,10 @@ while(<>) {
         s/\`(.*?)\`/"\$verbatim".&save_verbatim("{\\color{quotecolor}\\verb|".$1."|}")."\$"/ge;
         # urls (from http://stackoverflow.com/questions/161738/what-is-the-best-regular-expression-to-check-if-a-string-is-a-valid-url)
         s/\b((https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~\\_|!:,.;]*[-A-Z0-9+&@#\/%=~\\_|])/\\url{$1}/gi;
-        s/\[((\d+)#)?\s*([^\]]+\.(png|pdf|jpg))\s*\]/"\\begin{center} \\includegraphics\[width=".($2?$2*0.01:.7)."\\textwidth\]{$3} \\end{center}"/ge;
+        s/\[((\d+)#)?\s*([^\]]+\.(png|pdf|jpg))\s*\]/"\$verbatim".&save_verbatim("\\begin{center} \\includegraphics\[width=".($2?$2*0.01:.7)."\\textwidth\]{$3} \\end{center}")."\$"/gie;
         s/\b_(\S.*?)_\b/{\\it $1}/g;
         s/\*(\S.*?)\*/{\\bf $1}/g;
-        s/(?<!\\)_/\\_/g;
+        #s/(?<!\\)_/\\_/g;
         if(/^==+s*(.*?)\s*=+$/) {
             &close_lists(); $in_frame and push @document, '\end{frame}';
             $in_frame = 0;
