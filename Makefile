@@ -14,7 +14,7 @@ figures/%.pdf: figures/%.svg
 build/%.pdf: build/%.tex $(patsubst %.svg,%.pdf,$(wildcard figures/*.svg))
 	@mkdir -p build
 	ln -sf ../figures build/figures
-	cp *.sty build/
+#	cp *.sty build/
 #	xelatex -output-directory build -shell-escape $<
 #	xelatex -output-directory build -shell-escape $<
 	tectonic $< -o build -Z shell-escape
