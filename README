@@ -1,6 +1,5 @@
 Simple Beamer Slides
 ====================
-Benoit Favre <benoit.favre@lif.univ-mrs.fr>
 
 This converter allows to write slides with a wiki-like syntax and convert them
 to beamer/latex for a nice pdf rendering.  While many projects provide
@@ -24,7 +23,8 @@ au BufRead,BufNewFile *.slides setfiletype slides
 
 REQUIREMENTS:
 
-latex, pygments
+python
+optional: tectonic, inkscape, python-pygments (see Makefile)
 
 TUTORIAL:
 
